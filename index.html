@@ -3,17 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificador de Paridad</title>
+    <title>Diario de Mantenimiento de Bicicletas</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="http://martindalessandro.com/wp-content/uploads/2023/12/logo-martin.svg" type="image/x-icon">
 </head>
 <body>
     <div class="container">
-        <h1>Verificador de Paridad</h1>
-        <label for="numero">Ingresa un número:</label>
-        <input type="text" id="numero" placeholder="Escribe un número">
-        <button onclick="verificarParidad()">Verificar Paridad</button>
-        <p id="resultado"></p>
-        <script src="script.js"></script>
+        <h1>Diario de Mantenimiento de Bicicletas</h1>
+        
+        <form id="formularioMantenimiento">
+            <label for="fechaMantenimiento">Fecha:</label>
+            <input type="date" id="fechaMantenimiento" required>
+            
+            <label for="tareaMantenimiento">Tarea de Mantenimiento:</label>
+            <input type="text" id="tareaMantenimiento" required>
+            
+            <label for="detallesMantenimiento">Detalles:</label>
+            <textarea id="detallesMantenimiento"></textarea>
+
+            <label for="consejosMantenimiento">Consejos o Parámetros:</label>
+            <textarea id="consejosMantenimiento"></textarea>
+            
+            <button type="button" onclick="agregarMantenimiento()">Agregar Mantenimiento</button>
+        </form>
+
+        <h2>Registro de Mantenimientos</h2>
+        <ul id="listaMantenimientos"></ul>
+        <button  class="btn-restaurar" type="buttonreiniciar" onclick="reiniciarFormulario()">Reiniciar Formulario</button>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

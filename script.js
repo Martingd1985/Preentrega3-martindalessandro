@@ -1,21 +1,53 @@
-function determinarParidad(numero) {
-    if (numero % 2 === 0) {
-        return "par";
+// Variables de JS
+const formularioMantenimiento = document.getElementById('formularioMantenimiento');
+const fechaMantenimientoInput = document.getElementById('fechaMantenimiento');
+const tareaMantenimientoInput = document.getElementById('tareaMantenimiento');
+const detallesMantenimientoInput = document.getElementById('detallesMantenimiento');
+const consejosMantenimientoInput = document.getElementById('consejosMantenimiento');
+const listaMantenimientos = document.getElementById('listaMantenimientos');
+const registrosMantenimiento = [];
+
+// Objeto para representar un mantenimiento
+function RegistroMantenimiento(fecha, tarea, detalles, consejos) {
+    this.fecha = fecha;
+    this.tarea = tarea;
+    this.detalles = detalles;
+    this.consejos = consejos;
+}
+
+// Función para agregar un mantenimiento
+function agregarMantenimiento() {
+    const fecha = fechaMantenimientoInput.value;
+    const tarea = tareaMantenimientoInput.value;
+    const detalles = detallesMantenimientoInput.value;
+    const consejos = consejosMantenimientoInput.value;
+
+    if (fecha && tarea) {
+        const nuevoMantenimiento = new RegistroMantenimiento(fecha, tarea, detalles, consejos);
+        registrosMantenimiento.push(nuevoMantenimiento);
+        mostrarListaMantenimientos();
+        reiniciarFormulario();
     } else {
-        return "impar";
+        alert('Por favor, complete la fecha y la tarea de mantenimiento.');
     }
 }
 
-function verificarParidad() {
-    var inputNumero = document.getElementById("numero");
-    var resultadoContainer = document.getElementById("resultado");
-
-    var miNumero = parseInt(inputNumero.value);
-
-    if (!isNaN(miNumero)) {
-        var resultado = determinarParidad(miNumero);
-        resultadoContainer.textContent = "El número " + miNumero + " es " + resultado + ".";
-    } else {
-        resultadoContainer.textContent = "Por favor, ingresa un número válido.";
-    }
+// Función para mostrar la lista de mantenimientos
+function mostrarListaMantenimientos() {
+    listaMantenimientos.innerHTML = '';
+    registrosMantenimiento.forEach((mantenimiento, index) => {
+        const elementoLista = document.createElement('li');
+        elementoLista.innerHTML = `<strong>${mantenimiento.fecha}:</strong> ${mantenimiento.tarea}<br>
+                                  <em>Detalles:</em> ${mantenimiento.detalles}<br>
+                                  <em>Consejos o Parámetros:</em> ${mantenimiento.consejos}`;
+        listaMantenimientos.appendChild(elementoLista);
+    });
 }
+
+
+// Función para reiniciar el formulario
+function reiniciarFormulario() {
+    formularioMantenimiento.reset();
+}
+
+
