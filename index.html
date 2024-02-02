@@ -3,35 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diario de Mantenimiento de Bicicletas</title>
+    <title>Formulario de Mantenimiento</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="http://martindalessandro.com/wp-content/uploads/2023/12/logo-martin.svg" type="image/x-icon">
 </head>
 <body>
+
     <div class="container">
-        <h1>Diario de Mantenimiento de Bicicletas</h1>
-        
-        <form id="formularioMantenimiento">
-            <label for="fechaMantenimiento">Fecha:</label>
-            <input type="date" id="fechaMantenimiento" required>
-            
+        <form id="formularioMantenimiento" class="formulario">
+            <label for="fechaMantenimiento">Fecha de Mantenimiento:</label>
+            <input type="text" id="fechaMantenimiento" name="fechaMantenimiento" required class="flatpickr">
+            <br>
+
             <label for="tareaMantenimiento">Tarea de Mantenimiento:</label>
-            <input type="text" id="tareaMantenimiento" required>
-            
+            <input type="text" id="tareaMantenimiento" name="tareaMantenimiento" required>
+            <br>
+
             <label for="detallesMantenimiento">Detalles:</label>
-            <textarea id="detallesMantenimiento"></textarea>
+            <input type="text" id="detallesMantenimiento" name="detallesMantenimiento">
+            <br>
 
             <label for="consejosMantenimiento">Consejos o Parámetros:</label>
-            <textarea id="consejosMantenimiento"></textarea>
-            
-            <button type="button" onclick="agregarMantenimiento()">Agregar Mantenimiento</button>
+            <input type="text" id="consejosMantenimiento" name="consejosMantenimiento">
+            <br>
+
+            <button type="button" id="agregarBtn" class="btn">Agregar Mantenimiento</button>
+            <button type="button" id="reiniciarBtn" class="btn">Reiniciar Formulario</button>
         </form>
 
-        <h2>Registro de Mantenimientos</h2>
-        <ul id="listaMantenimientos"></ul>
-        <button  class="btn-restaurar" type="buttonreiniciar" onclick="reiniciarFormulario()">Reiniciar Formulario</button>
+        <ul id="listaMantenimientos" class="lista"></ul>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="script.js"></script>
 </body>
 </html>
