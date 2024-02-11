@@ -13,7 +13,6 @@ const filtrarPorTareaBtn = document.getElementById('filtrarPorTareaBtn');
 const restablecerFiltroBtn = document.getElementById('restablecerFiltroBtn');
 
 let registrosMantenimiento = [];
-let copiaRegistrosMantenimiento = []; // Copia de respaldo de los registros originales
 
 class RegistroMantenimiento {
     constructor(fecha, tarea, detalles, consejos) {
@@ -61,21 +60,31 @@ function guardarMantenimientoEnStorage() {
 }
 
 function buscarMantenimientoPorFecha(fecha) {
-    const mantenimientosEncontrados = registrosMantenimiento.filter(mantenimiento => mantenimiento.fecha.includes(fecha));
+    const mantenimientosEncontrados = registrosMantenimiento.filter(mantenimiento => mantenimiento.fecha === fecha);
     if (mantenimientosEncontrados.length > 0) {
         console.log(`Se encontraron mantenimientos para la fecha "${fecha}":`);
         mantenimientosEncontrados.forEach(mantenimiento => console.log(`- ${mantenimiento.fecha}: ${mantenimiento.tarea}`));
+        // Mostrar los resultados encontrados
+        listaMantenimientos.innerHTML = '';
+        mantenimientosEncontrados.forEach(mantenimiento => {
+            const elementoLista = document.createElement('li');
+            elementoLista.innerHTML = `<strong>${mantenimiento.fecha}:</strong> ${mantenimiento.tarea}<br>
+                                          <em>Detalles:</em> ${mantenimiento.detalles}<br>
+                                          <em>Consejos o Parámetros:</em> ${mantenimiento.consejos}`;
+            listaMantenimientos.appendChild(elementoLista);
+        });
     } else {
         console.log(`No se encontraron mantenimientos para la fecha "${fecha}"`);
     }
 }
 
 function filtrarMantenimientosPorTarea(tarea) {
-    // Limpiar la lista antes de mostrar los resultados filtrados
-    listaMantenimientos.innerHTML = '';
-    
     const mantenimientosFiltrados = registrosMantenimiento.filter(mantenimiento => mantenimiento.tarea.includes(tarea));
     if (mantenimientosFiltrados.length > 0) {
+        console.log(`Se encontraron ${mantenimientosFiltrados.length} mantenimientos para la tarea "${tarea}":`);
+        mantenimientosFiltrados.forEach(mantenimiento => console.log(`- ${mantenimiento.fecha}: ${mantenimiento.tarea}`));
+        // Mostrar los resultados encontrados
+        listaMantenimientos.innerHTML = '';
         mantenimientosFiltrados.forEach(mantenimiento => {
             const elementoLista = document.createElement('li');
             elementoLista.innerHTML = `<strong>${mantenimiento.fecha}:</strong> ${mantenimiento.tarea}<br>
@@ -89,13 +98,12 @@ function filtrarMantenimientosPorTarea(tarea) {
 }
 
 function restablecerFiltro() {
-    registrosMantenimiento = [...copiaRegistrosMantenimiento]; // Restaurar la lista de mantenimientos original
     mostrarListaMantenimientos();
 }
 
+// Event listeners
 agregarBtn.addEventListener('click', agregarMantenimiento);
 reiniciarBtn.addEventListener('click', reiniciarFormulario);
-
 buscarPorFechaBtn.addEventListener('click', () => {
     const fecha = buscarPorFechaInput.value;
     if (fecha) {
@@ -104,7 +112,6 @@ buscarPorFechaBtn.addEventListener('click', () => {
         alert('Por favor, ingrese una fecha para buscar.');
     }
 });
-
 filtrarPorTareaBtn.addEventListener('click', () => {
     const tarea = tareaBusquedaInput.value;
     if (tarea) {
@@ -113,5 +120,4 @@ filtrarPorTareaBtn.addEventListener('click', () => {
         alert('Por favor, ingrese una tarea para filtrar.');
     }
 });
-
 restablecerFiltroBtn.addEventListener('click', restablecerFiltro);
