@@ -3,38 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Mantenimiento</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <title>Registro de Mantenimiento de bicicletas</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
-
     <div class="container">
-        <form id="formularioMantenimiento" class="formulario">
-            <label for="fechaMantenimiento">Fecha de Mantenimiento:</label>
-            <input type="text" id="fechaMantenimiento" name="fechaMantenimiento" required class="flatpickr">
-            <br>
-
-            <label for="tareaMantenimiento">Tarea de Mantenimiento:</label>
-            <input type="text" id="tareaMantenimiento" name="tareaMantenimiento" required>
-            <br>
-
-            <label for="detallesMantenimiento">Detalles:</label>
-            <input type="text" id="detallesMantenimiento" name="detallesMantenimiento">
-            <br>
-
-            <label for="consejosMantenimiento">Consejos o Parámetros:</label>
-            <input type="text" id="consejosMantenimiento" name="consejosMantenimiento">
-            <br>
-
-            <button type="button" id="agregarBtn" class="btn">Agregar Mantenimiento</button>
-            <button type="button" id="reiniciarBtn" class="btn">Reiniciar Formulario</button>
-        </form>
-
-        <ul id="listaMantenimientos" class="lista"></ul>
+        <div class="columna">
+            <h1>Mantenimiento de tu Bicicleta</h1>
+            <form id="formularioMantenimiento">
+                <label for="fechaMantenimiento">Fecha:</label>
+                <input type="date" id="fechaMantenimiento" required><br>
+                <label for="tareaMantenimiento">Tarea:</label>
+                <input type="text" id="tareaMantenimiento" required><br>
+                <label for="detallesMantenimiento">Detalles:</label>
+                <textarea id="detallesMantenimiento"></textarea><br>
+                <label for="consejosMantenimiento">Consejos o Parámetros:</label>
+                <textarea id="consejosMantenimiento"></textarea><br>
+                <button type="button" id="agregarBtn">Agregar Mantenimiento</button>
+                <button type="button" id="reiniciarBtn">Reiniciar Formulario</button>
+            </form>
+        </div>
+        <div class="columna">
+            <div id="filtroContainer">
+                <label for="fechaBusquedaInput">Buscar por Fecha:</label>
+                <input type="date" id="fechaBusquedaInput">
+                <button type="button" id="buscarPorFechaBtn">Buscar</button>
+                <br>
+                <label for="tareaBusquedaInput">Filtrar por Tarea:</label>
+                <input type="text" id="tareaBusquedaInput">
+                <button type="button" id="filtrarPorTareaBtn">Filtrar</button>
+                <button type="button" id="restablecerFiltroBtn">Restablecer Filtro</button>
+            </div>
+            <ul id="listaMantenimientos"></ul>
+        </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="script.js"></script>
 </body>
 </html>
